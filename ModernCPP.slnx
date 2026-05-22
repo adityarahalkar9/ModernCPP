@@ -15,4 +15,8 @@
   <Project Path="10. Multithreading &amp; Parallelism/10. Multithreading &amp; Parallelism.vcxproj" />
   <Project Path="11. Async Programming &amp; Coroutines/11. Async Programming &amp; Coroutines.vcxproj" />
   <Project Path="12. Reflection/12. Reflection.vcxproj" />
+  <Project Path="13. Standard Library Mastery(STL)/13. Standard Library Mastery(STL).vcxproj" />
+  <Project Path="14. Exception handling/14. Exception handling.vcxproj" />
+  <Project Path="15. Networking IO &amp; Systems Programming/15. Networking IO &amp; Systems Programming.vcxproj" />
+  <Project Path="16. Low Level Memory, Object Model &amp; ABI/16. Low Level Memory, Object Model &amp; ABI.vcxproj" />
 </Solution>
