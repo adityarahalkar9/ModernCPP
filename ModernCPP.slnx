@@ -5,4 +5,5 @@
   </Configurations>
   <Project Path="01. Basics/01. Basics.vcxproj" />
   <Project Path="02. Memory/02. Memory.vcxproj" />
+  <Project Path="03. Structs/03. Structs.vcxproj" />
 </Solution>
