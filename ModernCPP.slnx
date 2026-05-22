@@ -7,4 +7,5 @@
   <Project Path="02. Memory/02. Memory.vcxproj" />
   <Project Path="03. Structs/03. Structs.vcxproj" />
   <Project Path="04. OOPs &amp; Classes/04. OOPs &amp; Classes.vcxproj" />
+  <Project Path="05. Smart Pointers &amp; RAII/05. Smart Pointers &amp; RAII.vcxproj" />
 </Solution>
