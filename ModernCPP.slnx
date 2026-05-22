@@ -12,4 +12,5 @@
   <Project Path="07. Lambdas, Closures &amp; Functional Patterns/07. Lambdas, Closures &amp; Functional Patterns.vcxproj" />
   <Project Path="08. Constexpr, Consteval &amp; Compile time computation/08. Constexpr, Consteval &amp; Compile time computation.vcxproj" />
   <Project Path="09. Concurrency/09. Concurrency.vcxproj" />
+  <Project Path="10. Multithreading &amp; Parallelism/10. Multithreading &amp; Parallelism.vcxproj" />
 </Solution>
