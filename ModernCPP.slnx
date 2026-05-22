@@ -10,4 +10,5 @@
   <Project Path="05. Smart Pointers &amp; RAII/05. Smart Pointers &amp; RAII.vcxproj" />
   <Project Path="06. Templates &amp; Generic Programming/06. Templates &amp; Generic Programming.vcxproj" />
   <Project Path="07. Lambdas, Closures &amp; Functional Patterns/07. Lambdas, Closures &amp; Functional Patterns.vcxproj" />
+  <Project Path="08. Constexpr, Consteval &amp; Compile time computation/08. Constexpr, Consteval &amp; Compile time computation.vcxproj" />
 </Solution>
