@@ -366,3 +366,7 @@ MigrationBackup/
 FodyWeavers.xsd
 /01. Basics/01. Basics.vcxproj.filters
 /01. Basics/01. Basics.vcxproj
+/01. Basics/01. Basics.vcxproj
+/01. Basics/01. Basics.vcxproj.filters
+/02. Memory/02. Memory.vcxproj
+/02. Memory/02. Memory.vcxproj.filters
