@@ -8,4 +8,6 @@
   <Project Path="03. Structs/03. Structs.vcxproj" />
   <Project Path="04. OOPs &amp; Classes/04. OOPs &amp; Classes.vcxproj" />
   <Project Path="05. Smart Pointers &amp; RAII/05. Smart Pointers &amp; RAII.vcxproj" />
+  <Project Path="06. Templates &amp; Generic Programming/06. Templates &amp; Generic Programming.vcxproj" />
+  <Project Path="07. Lambdas, Closures &amp; Functional Patterns/07. Lambdas, Closures &amp; Functional Patterns.vcxproj" />
 </Solution>
