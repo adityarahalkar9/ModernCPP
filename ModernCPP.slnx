@@ -14,4 +14,5 @@
   <Project Path="09. Concurrency/09. Concurrency.vcxproj" />
   <Project Path="10. Multithreading &amp; Parallelism/10. Multithreading &amp; Parallelism.vcxproj" />
   <Project Path="11. Async Programming &amp; Coroutines/11. Async Programming &amp; Coroutines.vcxproj" />
+  <Project Path="12. Reflection/12. Reflection.vcxproj" />
 </Solution>
