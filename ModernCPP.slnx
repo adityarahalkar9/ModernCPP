@@ -6,4 +6,5 @@
   <Project Path="01. Basics/01. Basics.vcxproj" />
   <Project Path="02. Memory/02. Memory.vcxproj" />
   <Project Path="03. Structs/03. Structs.vcxproj" />
+  <Project Path="04. OOPs &amp; Classes/04. OOPs &amp; Classes.vcxproj" />
 </Solution>
