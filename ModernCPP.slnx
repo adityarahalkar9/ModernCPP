@@ -4,4 +4,5 @@
     <Platform Name="x86" />
   </Configurations>
   <Project Path="01. Basics/01. Basics.vcxproj" />
+  <Project Path="02. Memory/02. Memory.vcxproj" />
 </Solution>
