@@ -13,4 +13,5 @@
   <Project Path="08. Constexpr, Consteval &amp; Compile time computation/08. Constexpr, Consteval &amp; Compile time computation.vcxproj" />
   <Project Path="09. Concurrency/09. Concurrency.vcxproj" />
   <Project Path="10. Multithreading &amp; Parallelism/10. Multithreading &amp; Parallelism.vcxproj" />
+  <Project Path="11. Async Programming &amp; Coroutines/11. Async Programming &amp; Coroutines.vcxproj" />
 </Solution>
