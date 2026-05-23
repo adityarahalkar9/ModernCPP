@@ -4,3 +4,4 @@ void HelloWorld();
 void KeywordDemo();
 void VariableDemo();
 void DataTypes();
+int Functions();
