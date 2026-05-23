@@ -8,3 +8,4 @@ int Functions();
 int Operators();
 int Conditions();
 int ControlFlow();
+int Size_t_size_of();
