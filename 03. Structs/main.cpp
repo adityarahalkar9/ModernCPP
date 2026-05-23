@@ -1,5 +1,6 @@
 #include <iostream>
+#include "struct_header.h"
 
 int main(){
-	std::cout << "Hello from structs" << std::endl;
+	BasicStructs();
 }
