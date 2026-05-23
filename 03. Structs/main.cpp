@@ -2,5 +2,5 @@
 #include "struct_header.h"
 
 int main(){
-	IntermediateStruct();
+	AdvancedStruct();
 }
