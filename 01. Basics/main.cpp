@@ -2,5 +2,5 @@
 #include "basic_header.h"
 
 int main(){
-	VariableDemo();
+	DataTypes();
 }
