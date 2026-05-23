@@ -1,5 +1,6 @@
 #include <iostream>
+#include "memory_header.h"
 
 int main(){
-	std::cout << "Hello from memory" << std::endl;
+	Pointers();
 }
