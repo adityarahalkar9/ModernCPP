@@ -3,3 +3,4 @@
 int Pointers();
 int References();
 int Dynamic();
+int Vector();
