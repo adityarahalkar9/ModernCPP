@@ -2,3 +2,4 @@
 
 void HelloWorld();
 void KeywordDemo();
+void VariableDemo();
