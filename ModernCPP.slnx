@@ -3,20 +3,21 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="01. Basics/01. Basics.vcxproj" />
-  <Project Path="02. Memory/02. Memory.vcxproj" />
-  <Project Path="03. Structs/03. Structs.vcxproj" />
-  <Project Path="04. OOPs &amp; Classes/04. OOPs &amp; Classes.vcxproj" />
-  <Project Path="05. Smart Pointers &amp; RAII/05. Smart Pointers &amp; RAII.vcxproj" />
-  <Project Path="06. Templates &amp; Generic Programming/06. Templates &amp; Generic Programming.vcxproj" />
-  <Project Path="07. Lambdas, Closures &amp; Functional Patterns/07. Lambdas, Closures &amp; Functional Patterns.vcxproj" />
-  <Project Path="08. Constexpr, Consteval &amp; Compile time computation/08. Constexpr, Consteval &amp; Compile time computation.vcxproj" />
-  <Project Path="09. Concurrency/09. Concurrency.vcxproj" />
-  <Project Path="10. Multithreading &amp; Parallelism/10. Multithreading &amp; Parallelism.vcxproj" />
-  <Project Path="11. Async Programming &amp; Coroutines/11. Async Programming &amp; Coroutines.vcxproj" />
-  <Project Path="12. Reflection/12. Reflection.vcxproj" />
-  <Project Path="13. Standard Library Mastery(STL)/13. Standard Library Mastery(STL).vcxproj" />
-  <Project Path="14. Exception handling/14. Exception handling.vcxproj" />
-  <Project Path="15. Networking IO &amp; Systems Programming/15. Networking IO &amp; Systems Programming.vcxproj" />
-  <Project Path="16. Low Level Memory, Object Model &amp; ABI/16. Low Level Memory, Object Model &amp; ABI.vcxproj" />
+  <Project Path="01. Basics/01. Basics.vcxproj" Id="e6b8757e-f711-4fcb-bd75-d7b6b0308a01" />
+  <Project Path="02. Memory/02. Memory.vcxproj" Id="9c1e33d1-72ce-40ac-bc7d-201f5fb10c34" />
+  <Project Path="03. Structs/03. Structs.vcxproj" Id="bd2a7589-8897-4e50-b079-6ec206933c13" />
+  <Project Path="04. OOPs &amp; Classes/04. OOPs &amp; Classes.vcxproj" Id="f0016e6f-b67f-4f48-bb51-b5e6dd7a9d00" />
+  <Project Path="05. Smart Pointers &amp; RAII/05. Smart Pointers &amp; RAII.vcxproj" Id="56ea0dc7-1136-4164-be1b-6351baf4b618" />
+  <Project Path="06. Templates &amp; Generic Programming/06. Templates &amp; Generic Programming.vcxproj" Id="2a6ec3a6-e17e-45a8-a36a-0f2bb308f922" />
+  <Project Path="07. Lambdas, Closures &amp; Functional Patterns/07. Lambdas, Closures &amp; Functional Patterns.vcxproj" Id="e6a8b0f4-93f9-4fa3-89f8-7f949feed35e" />
+  <Project Path="08. Constexpr, Consteval &amp; Compile time computation/08. Constexpr, Consteval &amp; Compile time computation.vcxproj" Id="7c21d048-f3f5-43db-b604-28ab0d07b534" />
+  <Project Path="09. Concurrency/09. Concurrency.vcxproj" Id="a60c82ab-a9c7-46c0-9165-84b4a4464bc5" />
+  <Project Path="10. Multithreading &amp; Parallelism/10. Multithreading &amp; Parallelism.vcxproj" Id="11de718f-1ec5-4c12-a1c9-f4bbe385dac2" />
+  <Project Path="11. Async Programming &amp; Coroutines/11. Async Programming &amp; Coroutines.vcxproj" Id="613cb13f-cf08-4de2-b48a-b90e0320ba46" />
+  <Project Path="12. Reflection/12. Reflection.vcxproj" Id="08ad73e3-1f91-4ccb-bc57-adcff48268d7" />
+  <Project Path="13. Standard Library Mastery(STL)/13. Standard Library Mastery(STL).vcxproj" Id="ff306aa3-9f2a-45ae-8865-272b003a9548" />
+  <Project Path="14. Exception handling/14. Exception handling.vcxproj" Id="913cfbb8-0738-4654-8403-44d1530fde62" />
+  <Project Path="15. Networking IO &amp; Systems Programming/15. Networking IO &amp; Systems Programming.vcxproj" Id="90d9d1e0-f836-4181-8e1c-c9c3191884b0" />
+  <Project Path="16. Low Level Memory, Object Model &amp; ABI/16. Low Level Memory, Object Model &amp; ABI.vcxproj" Id="824ebe76-0df7-48bc-a3e5-8741aafbdd09" />
+  <Project Path="17. Data Structures &amp; Algorithms(DSA)/17. Data Structures &amp; Algorithms(DSA).vcxproj" Id="18a0b501-192d-4047-a838-1caa37ac6080" />
 </Solution>
