@@ -2,5 +2,5 @@
 #include "memory_header.h"
 
 int main(){
-	References();
+	Dynamic();
 }

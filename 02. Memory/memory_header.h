@@ -2,3 +2,4 @@
 
 int Pointers();
 int References();
+int Dynamic();
