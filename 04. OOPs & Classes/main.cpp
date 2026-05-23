@@ -1,5 +1,6 @@
 #include <iostream>
+#include "class_header.h"
 
 int main(){
-	std::cout << "Hello from classes" << std::endl;
+	BasicClass();
 }
