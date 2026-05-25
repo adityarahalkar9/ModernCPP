@@ -3,3 +3,4 @@
 int BasicClass();
 int Constructors();
 int Destructors();
+int Inheritance();

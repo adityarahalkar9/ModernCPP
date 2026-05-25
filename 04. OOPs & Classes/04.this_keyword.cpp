@@ -7,10 +7,13 @@
 	instance of the object that is currently executing the code.
 */
 // Basic usage of this operator
-void PrintEntity(BasicThis::Entity* e);
 namespace BasicThis{
+	class Entity;
+	void PrintEntity(Entity* e);
+
 	class Entity{
 	public:
+		
 		int x, y;
 		Entity(int x, int y){
 			this->x = x;
