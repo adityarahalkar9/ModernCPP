@@ -2,3 +2,4 @@
 
 int BasicClass();
 int Constructors();
+int Destructors();
