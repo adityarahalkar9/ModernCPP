@@ -5,3 +5,4 @@ int Constructors();
 int Destructors();
 int Inheritance();
 int OperatorOverloading();
+int VirtualFuction();

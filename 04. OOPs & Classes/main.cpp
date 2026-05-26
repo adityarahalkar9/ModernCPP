@@ -2,5 +2,5 @@
 #include "class_header.h"
 
 int main(){
-	OperatorOverloading();
+	VirtualFuction();
 }
