@@ -761,6 +761,126 @@ int VectorOverload(){
 
 
 
+// ======================>>
+// Matrix – Overloading (), +, *, and <<
+/*
+	This class shows how to overload operator() for element access, arithmetic operators
+	for matrix operations, and stream insertion.
+*/
+class Matrix{
+private:
+	std::vector<std::vector<double>> m_data{};
+	size_t m_rows{0};
+	size_t m_cols{0};
+public:
+	// Constructor: creates a rows × cols matrix, optionally initializing all elements.
+	Matrix(size_t rows, size_t cols, double init = 0.0) : m_data(rows, std::vector<double>(cols, init)), m_rows{rows}, m_cols{cols}{}
+
+	// OPERATOR OVERLOADS
+
+	// Access element at (row, col) – non‑const version (allows modification).
+	double& operator()(size_t row, size_t col){
+		return m_data.at(row).at(col);	// at() performs bounds checking
+	}
+	// Const version for read‑only access.
+	const double& operator()(size_t row, size_t col) const{
+		return m_data.at(row).at(col);
+	}
+
+	// Matrix addition
+	Matrix operator+(const Matrix& rhs) const{
+		if(m_rows != rhs.m_rows || m_cols != rhs.m_cols){
+			throw std::invalid_argument{"Matrix dimensions must match for addition"};
+		}
+		Matrix result{m_rows, m_cols};
+		for(size_t i = 0; i < m_rows; ++i){
+			for(size_t j = 0; j < m_cols; ++j){
+				result(i, j) = (*this)(i, j) + rhs(i, j);
+			}
+		}
+		return result;
+	}
+	// Matrix multiplication (this * rhs)
+	Matrix operator*(const Matrix& rhs) const{
+		if(m_cols != rhs.m_rows){
+			throw std::invalid_argument{"Incompatible dimensions for multiplication"};
+		}
+		Matrix result{m_rows, rhs.m_cols};
+		for(size_t i = 0; i < m_rows; ++i){
+			for(size_t j = 0; j < rhs.m_cols; ++j){
+				double sum = 0.0;
+				for(size_t k = 0; k < m_cols; ++k){
+					sum += (*this)(i, k) * rhs(k, j);
+				}
+				result(i, j) = sum;
+			}
+		}
+		return result;
+	}
+	// Scalar multiplication (matrix * scalar)
+	Matrix operator*(double scalar) const{
+		Matrix result{m_rows, m_cols};
+		for(size_t i = 0; i < m_rows; ++i){
+			for(size_t j = 0; j < m_cols; ++j){
+				result(i, j) = (*this)(i, j) * scalar;
+			}
+		}
+		return result;
+	}
+
+	// Equality comparison
+	bool operator==(const Matrix& rhs) const{
+		return m_rows == rhs.m_rows && m_cols == rhs.m_cols && m_data == rhs.m_data;
+	}
+	// Stream output – prints the matrix row by row.
+	friend std::ostream& operator<<(std::ostream& os, const Matrix& m){
+		for(size_t i = 0; i < m.m_rows; ++i){
+			os << "[ ";
+			for(size_t j = 0; j < m.m_cols; ++j) {
+				os << m(i, j) << " ";
+			}
+			os << "]" << std::endl;
+		}
+		return os;
+	}
+	// Getters for dimensions.
+	size_t rows() const{
+		return m_rows;
+	}
+	size_t cols() const{
+		return m_cols;
+	}
+};
+// Non‑member scalar * matrix (for expressions like 2.0 * mat)
+Matrix operator*(double scalar, const Matrix& m) {
+	return m * scalar;   // reuse member operator*
+}
+int MatrixOverload(){
+	// Create a 2x3 matrix initialized to 1.0, then modify some elements.
+	Matrix A{2, 3, 1.0};
+	A(0, 1) = 2.0;
+	A(1, 2) = 3.0;
+	std::cout << "Matrix A:" << std::endl << A;
+
+	// Create a 3x2 matrix initialized to 2.0, then modify.
+	Matrix B{3, 2, 2.0};
+	B(1, 0) = 0.0;
+	std::cout << "Matrix B:" << std::endl << B;
+
+	Matrix C = A * B;
+	std::cout << "A * B:" << std::endl << C;
+
+	Matrix D = A * 2.5;
+	std::cout << "A * 2.5:" << std::endl << D;
+
+	Matrix E = 0.5 * B;
+	std::cout << "0.5 * B:" << std::endl << E;
+
+	return 0;
+}
+
+
+
 
 int OperatorOverloading(){
 	// BasicOverloading();
@@ -768,7 +888,8 @@ int OperatorOverloading(){
 	// SmartPointerOverloads();
 	// FunctionOverloading();
 	// StringOverload();
-	VectorOverload();
+	// VectorOverload();
+	MatrixOverload();
 
 	return 0;
 }
