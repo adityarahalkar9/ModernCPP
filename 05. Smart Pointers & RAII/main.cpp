@@ -1,5 +1,6 @@
 #include <iostream>
+#include "smart_header.h"
 
 int main(){
-	std::cout << "Hello from RAII" << std::endl;
+	RAII();
 }
