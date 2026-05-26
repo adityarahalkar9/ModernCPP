@@ -929,6 +929,57 @@ int OverloadingNewDelete(){
 
 
 
+// ======================>>
+// Type Conversion Operators
+// Allows implicit or explicit conversion of your class to another type.
+class Fraction{
+private:
+	int m_num{0};
+	int m_den{1};
+public:
+	Fraction(int num = 0, int den = 1) : m_num{num}, m_den{den}{
+		if(m_den == 0){
+			throw std::invalid_argument{"Denominator cannot be zero"};
+		}
+	}
+
+	// TYPE CONVERSION OPERATORS
+
+	// Implicit conversion to double
+	operator double() const{
+		return static_cast<double>(m_num) / m_den;
+	}
+	// Implicit conversion to float
+	operator float() const{
+		return static_cast<float>(m_num) / m_den;
+	}
+	// Explicit conversion to int (truncates toward zero)
+	explicit operator int() const{
+		return m_num / m_den;
+	}
+	// Stream output for easy printing
+	friend std::ostream& operator<<(std::ostream& os, const Fraction& f){
+		return os << f.m_num << "/" << f.m_den;
+	}
+};
+int OverloadingTypeConversionOperators(){
+	Fraction f{3, 4};
+	std::cout << "Fraction: " << f << std::endl;
+
+	double d = f;                 // implicit conversion to double
+	float fl = f;                 // implicit conversion to float
+	int i = static_cast<int>(f);  // explicit conversion required (cannot be implicit)
+
+	std::cout << "As double: " << d << std::endl;
+	std::cout << "As float:  " << fl << std::endl;
+	std::cout << "As int (truncated): " << i << std::endl;
+
+	return 0;
+}
+
+
+
+
 int OperatorOverloading(){
 	// BasicOverloading();
 	// ComplexOverload();
@@ -937,7 +988,8 @@ int OperatorOverloading(){
 	// StringOverload();
 	// VectorOverload();
 	// MatrixOverload();
-	OverloadingNewDelete();
+	// OverloadingNewDelete();
+	OverloadingTypeConversionOperators();
 
 	return 0;
 }
