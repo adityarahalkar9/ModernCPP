@@ -66,7 +66,7 @@ protected:
 	std::string brand{};
 	int year{};
 public:
-	Vehicle(std::string b, int y) : brand(b), year(y){}
+	Vehicle(std::string b, int y) : brand{b}, year{y}{}
 	void DisplayInfo(){
 		std::cout << "Brand is: " << brand << ", year " << year << std::endl;
 	}
@@ -163,7 +163,7 @@ namespace multilevel{
 		std::string name{};
 		int age{};
 	public:
-		Person(std::string n, int a) : name(n), age(a){
+		Person(std::string n, int a) : name{n}, age{a}{
 			std::cout << "[Person] created: " << name << ", age: " << age << std::endl;
 		}
 		void Introduce() const{
@@ -229,11 +229,151 @@ int MultilevelInheritance(){
 
 
 
+// HIERARCHICAL INHERITANCE
+/*
+	Multiple classes inherit from the same base class. Each derived class gets all members of Base class
+	plus its own specific members.
+*/
+namespace hierarchical{
+
+	// Base class Animal
+	class Animal{
+	protected:
+		std::string name{};
+		int age{};
+	public:
+		Animal(std::string n, int a) : name{n}, age{a}{
+			std::cout << "[Hierarchical::Animal] created: " << name << ", " << age << " years old" << std::endl;
+		}
+		void Eat() const{
+			std::cout << name << " is eating" << std::endl;
+		}
+		void Sleep() const{
+			std::cout << name << " is sleeping" << std::endl;
+		}
+		void DisplayInfo() const{
+			std::cout << "Name is: " << name << ", Age: " << age << std::endl;
+		}
+	};
+	// Derived class 1
+	class Dog : public Animal{
+	private:
+		std::string breed{};
+		bool is_trained{};
+	public:
+		Dog(std::string n, int a, std::string b, bool trained) : Animal{n, a}, breed{b}, is_trained{trained}{
+			std::cout << "[Hierarchical::Dog Created: Breed = "
+				<< breed << ", Trained = " << (is_trained ? "Yes" : "No") << std::endl;
+		}
+		void Bark() const{
+			std::cout << name << " says: Woof! Woof!" << std::endl;
+		}
+		void Fetch() const{
+			std::cout << name << " is fetching the stick." << std::endl;
+		}
+		void DisplayDogInfo() const{
+			DisplayInfo();
+			std::cout << ", Breed: " << breed << ", Trained: "
+				<< (is_trained ? "Yes" : "No") << std::endl;
+		}
+	};
+	// Derived class 2
+	class Cat : public Animal{
+	private:
+		std::string fur_color{};
+		bool is_indoor{};
+	public:
+		Cat(std::string n, int a, std::string color, bool indoor) : Animal{n, a}, fur_color{color}, is_indoor{indoor}{
+			std::cout << "[hierarchical::Cat] Created: Fur = " << fur_color
+				<< ", Indoor = " << (is_indoor ? "Yes" : "No") << "\n";
+		}
+		void Meow() const{
+			std::cout << name << " says: Meow! Meow!" << std::endl;
+		}
+		void Scratch() const{
+			std::cout << name << " is scratching the furniture" << std::endl;
+		}
+		void DisplayCatInfo() const{
+			DisplayInfo();
+			std::cout << ", Fur Color: " << fur_color << ", Indoor Cat: "
+				<< (is_indoor ? "Yes" : "No") << std::endl;
+		}
+	};
+	// Derived class 3
+	class Bird : public Animal{
+	private:
+		std::string species{};
+		double wingspan{};
+	public:
+		Bird(std::string n, int a, std::string sp, double ws) : Animal{n, a}, species{sp}, wingspan{ws}{
+			std::cout << "[hierarchical::Bird] Created: Species = " << species
+				<< ", Wingspan = " << wingspan << " cm\n";
+		}
+		void Chirp() const{
+			std::cout << name << " chirps: Tweet! Tweet!" << std::endl;
+		}
+		void Fly() const{
+			std::cout << name << " is flying with a wingspan of " << wingspan << std::endl;
+		}
+		void displayBirdInfo() const{
+			DisplayInfo();
+			std::cout << ", Species: " << species << ", Wingspan: " << wingspan << std::endl;
+		}
+	};
+}
+int HierarchicalInheritance(){
+	std::cout << "=== Hierarchical Inheritance (using hierarchical:: prefix) ===\n\n";
+
+	// Create objects using explicit namespace qualification
+	std::cout << "--- Creating a Dog ---\n";
+	hierarchical::Dog myDog{"Buddy", 3, "Golden Retriever", true};
+
+	std::cout << "\n--- Creating a Cat ---\n";
+	hierarchical::Cat myCat{"Whiskers", 2, "Orange Tabby", true};
+
+	std::cout << "\n--- Creating a Bird ---\n";
+	hierarchical::Bird myBird{"Tweety", 1, "Canary", 20.5};
+
+	std::cout << "\n========== DOG ACTIONS ==========\n";
+	myDog.Eat();
+	myDog.Sleep();
+	myDog.Bark();
+	myDog.Fetch();
+	myDog.DisplayDogInfo();
+
+	std::cout << "\n========== CAT ACTIONS ==========\n";
+	myCat.Eat();
+	myCat.Sleep();
+	myCat.Meow();
+	myCat.Scratch();
+	myCat.DisplayCatInfo();
+
+	std::cout << "\n========== BIRD ACTIONS ==========\n";
+	myBird.Eat();
+	myBird.Sleep();
+	myBird.Chirp();
+	myBird.Fly();
+	myBird.displayBirdInfo();
+
+	std::cout << "\n--- Common base class interface (works for all) ---\n";
+	myDog.DisplayInfo();
+	std::cout << "\n";
+	myCat.DisplayInfo();
+	std::cout << "\n";
+	myBird.DisplayInfo();
+	std::cout << "\n";
+
+	return 0;
+}
+
+
+
 int Inheritance(){
 	// BasicInheritance();
 	// SingleInheritance();
 	// MultipleInheritance();
 	// MultilevelInheritance();
+	HierarchicalInheritance();
 
 	return 0;
 }
