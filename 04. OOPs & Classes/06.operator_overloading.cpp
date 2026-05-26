@@ -881,6 +881,53 @@ int MatrixOverload(){
 
 
 
+// ======================>>
+// Overloading new and delete (Class‑Specific)
+// You can customize memory allocation for a specific class.
+class Traced{
+private:
+	int m_id{0};
+	static inline int s_counter{0};
+public:
+	Traced() : m_id{++s_counter}{
+		std::cout << "Traced #" << m_id << " constructed" << std::endl;
+	}
+	~Traced(){
+		std::cout << "Traced #" << m_id << " destroyed" << std::endl;
+	}
+	// Class-specific operator new (single object)
+	static void* operator new(size_t size){
+		std::cout << "Custom new: allocating " << size << " bytes" << std::endl;
+		return std::malloc(size);
+	}
+	// Class-specific operator delete (single object)
+	static void operator delete(void* ptr){
+		std::cout << "Custom delete: freeing memory" << std::endl;
+		std::free(ptr);
+	}
+	// Class‑specific operator new[] (array)
+	static void* operator new[](size_t size){
+		std::cout << "Custom new[]: allocating " << size << " bytes" << std::endl;
+		return std::malloc(size);
+	}
+	// Class‑specific operator delete[] (array)
+	static void operator delete[](void* ptr){
+		std::cout << "Custom delete[]: freeing memory" << std::endl;
+		std::free(ptr);
+	}
+};
+int OverloadingNewDelete(){
+	std::cout << "--- Single object ---" << std::endl;
+	Traced* p = new Traced;
+	delete p;
+	std::cout << std::endl << "--- Array of objects ---" << std::endl;
+	Traced* arr = new Traced[3];
+	delete[] arr;
+
+	return 0;
+}
+
+
 
 int OperatorOverloading(){
 	// BasicOverloading();
@@ -889,7 +936,8 @@ int OperatorOverloading(){
 	// FunctionOverloading();
 	// StringOverload();
 	// VectorOverload();
-	MatrixOverload();
+	// MatrixOverload();
+	OverloadingNewDelete();
 
 	return 0;
 }
