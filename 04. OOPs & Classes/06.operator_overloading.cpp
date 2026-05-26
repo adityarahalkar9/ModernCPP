@@ -979,6 +979,62 @@ int OverloadingTypeConversionOperators(){
 
 
 
+// ======================>>
+// Overloading ->* (Pointer‑to‑Member)
+/*
+	This is an advanced feature. The example shows a wrapper that allows using ->*
+	with member pointers.
+*/
+namespace overloadPointerMember{
+	class Test{
+	public:
+		int value{42};
+		void show() const{
+			std::cout << "Value = " << value << std::endl;
+		}
+	};
+	// A wrapper that holds a pointer to T and overloads ->*
+	template <typename T>
+	class PointerWrapper{
+	private:
+		T* m_ptr{nullptr};
+	public:
+		explicit PointerWrapper(T* ptr) : m_ptr{ptr}{}
+
+		// Overload ->* for member data pointers (e.g., &Test::value)
+		auto& operator->*(int T::* memberPtr){
+			return m_ptr->*memberPtr;
+		}
+
+		// Overload ->* for const member function pointers
+		// Returns a lambda that captures 'this' and the member pointer.
+		template <typename Ret, typename... Args>
+		auto operator->*(Ret(T::* memberFunc)(Args...) const) const {
+			// The lambda will call the member function on the stored object.
+			return [this, memberFunc](Args... args) -> Ret{
+				return (m_ptr->*memberFunc)(std::forward<Args>(args)...);
+				};
+		}
+	};
+}
+int OverloadingPointerToMember(){
+	overloadPointerMember::Test obj{100};
+	overloadPointerMember::PointerWrapper<overloadPointerMember::Test> pw{&obj};
+
+	// Using ->* with a pointer to data member
+	int overloadPointerMember::Test::* pValue = &overloadPointerMember::Test::value;
+	std::cout << "pw->*pValue = " << (pw->*pValue) << std::endl;
+	pw->*pValue = 200;
+	std::cout << "After assignment, obj.value = " << obj.value << std::endl;
+
+	// Using ->* with a pointer to member function
+	void (overloadPointerMember::Test:: * pShow)() const = &overloadPointerMember::Test::show;
+	(pw->*pShow)();   // Calls obj.show()
+
+	return 0;
+}
+
+
 
 int OperatorOverloading(){
 	// BasicOverloading();
@@ -989,7 +1045,24 @@ int OperatorOverloading(){
 	// VectorOverload();
 	// MatrixOverload();
 	// OverloadingNewDelete();
-	OverloadingTypeConversionOperators();
+	// OverloadingTypeConversionOperators();
+	OverloadingPointerToMember();
 
 	return 0;
 }
+
+/*
+	Summary of Best Practices
+
+	-> Keep semantics intuitive: Overload operators to do what users
+	   expect (e.g., + should add, not subtract).
+	-> Maintain symmetry: For binary operators that can accept different types on
+	   either side, implement non‑member versions.
+	-> Return references where appropriate: Compound assignment (+=) should return
+	   *this by reference.
+	-> Use const correctly: Mark member operators that don't modify the object as const.
+	-> Avoid overloading &&, ||, and , unless you have a very compelling reason; they lose
+	   short‑circuit evaluation.
+	-> Prefer non‑member friend functions for operators that need access to private data
+	   but should work symmetrically (e.g., +, ==, <<).
+*/
