@@ -6,3 +6,4 @@ int Destructors();
 int Inheritance();
 int OperatorOverloading();
 int VirtualFuction();
+int Interfaces();
