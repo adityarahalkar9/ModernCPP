@@ -632,12 +632,143 @@ int StringOverload(){
 
 
 
+// ======================>>
+// Vector3D – Overloading Arithmetic and Cross Product
+/*
+	Demonstrates overloading binary operators, compound assignment, subscript, function
+	call (norm), and using % for cross product.
+*/
+class Vector3D{
+private:
+	double m_x{0.0};
+	double m_y{0.0};
+	double m_z{0.0};
+public:
+	Vector3D(double x = 0.0, double y = 0.0, double z = 0.0) : m_x{x}, m_y{y}, m_z{z}{}
+
+	// MEMBER OPERATORS
+
+	// Binary addition
+	Vector3D operator+(const Vector3D& rhs) const{
+		return Vector3D(m_x + rhs.m_x, m_y + rhs.m_y, m_z + rhs.m_z);
+	}
+	// Binary subtraction
+	Vector3D operator-(const Vector3D& rhs) const{
+		return Vector3D{m_x - rhs.m_x, m_y - rhs.m_y, m_z - rhs.m_z};
+	}
+	// Scalar multiplication (vector * scalar)
+	Vector3D operator*(double scalar) const{
+		return Vector3D{m_x * scalar, m_y * scalar, m_z * scalar};
+	}
+	// Scalar division (vector / scalar)
+	Vector3D operator/(double scalar) const{
+		return Vector3D{m_x / scalar, m_y / scalar, m_z / scalar};
+	}
+	// Dot product – using * between two vectors.
+	double operator*(const Vector3D& rhs) const{
+		return m_x * rhs.m_x + m_y * rhs.m_y + m_z * rhs.m_z;
+	}
+	// Cross product – using % (a less common operator, but legal).
+	Vector3D operator%(const Vector3D& rhs) const{
+		return Vector3D{
+			m_y * rhs.m_z - m_z * rhs.m_y,
+			m_z * rhs.m_x - m_x * rhs.m_z,
+			m_x * rhs.m_y - m_y * rhs.m_x
+		};
+	}
+	// Compound addition (+=)
+	Vector3D& operator+=(const Vector3D& rhs){
+		m_x += rhs.m_x;
+		m_y += rhs.m_y;
+		m_z += rhs.m_z;
+		return *this;
+	}
+	// Compound subtraction (-=)
+	Vector3D& operator-=(const Vector3D& rhs){
+		m_x -= rhs.m_x;
+		m_y -= rhs.m_y;
+		m_z -= rhs.m_z;
+		return *this;
+	}
+	// Compound scalar multiplication (*=)
+	Vector3D& operator*=(double scalar){
+		m_x *= scalar;
+		m_y *= scalar;
+		m_z *= scalar;
+		return *this;
+	}
+	// Unary minus (negation)
+	Vector3D operator-() const{
+		return Vector3D{-m_x, -m_y, -m_z};
+	}
+	// Subscript operator (non‑const) – index 0,1,2 for x,y,z.
+	double& operator[](int index){
+		if(index == 0)      return m_x;
+		else if(index == 1) return m_y;
+		else                 return m_z;
+	}
+	const double& operator[](int index) const{
+		if(index == 0)      return m_x;
+		else if(index == 1) return m_y;
+		else                 return m_z;
+	}
+	// Function call operator – returns the magnitude (norm).
+	double operator()() const{
+		return std::sqrt(m_x * m_x + m_y * m_y + m_z * m_z);
+	}
+	// Equality comparison
+	bool operator==(const Vector3D& rhs) const{
+		return m_x == rhs.m_x && m_y == rhs.m_y && m_z == rhs.m_z;
+	}
+	bool operator!=(const Vector3D& rhs) const{
+		return !(*this == rhs);
+	}
+
+	// Stream output
+	friend std::ostream& operator<<(std::ostream& os, const Vector3D& v){
+		os << "(" << v.m_x << ", " << v.m_y << ", " << v.m_z << ")";
+		return os;
+	}
+};
+// Non‑member scalar * vector (for expressions like 2.5 * v)
+Vector3D operator*(double scalar, const Vector3D& v) {
+	return v * scalar;   // reuse member operator*
+}
+int VectorOverload(){
+	Vector3D v1{1.0, 2.0, 3.0};
+	Vector3D v2{4.0, 5.0, 6.0};
+
+	std::cout << "v1 = " << v1 << std::endl;
+	std::cout << "v2 = " << v2 << std::endl;
+
+	std::cout << "v1 + v2 = " << v1 + v2 << std::endl;
+	std::cout << "v1 - v2 = " << v1 - v2 << std::endl;
+	std::cout << "v1 * 2.5 = " << v1 * 2.5 << std::endl;
+	std::cout << "3.0 * v2 = " << 3.0 * v2 << std::endl;
+	std::cout << "v1 · v2 (dot) = " << v1 * v2 << std::endl;
+	std::cout << "v1 × v2 (cross) = " << v1 % v2 << std::endl;
+
+	v1 += v2;
+	std::cout << "After v1 += v2: " << v1 << std::endl;
+
+	std::cout << "Norm of v1: " << v1() << std::endl;
+
+	v1[0] = 100.0;   // modify x component
+	std::cout << "After v1[0] = 100: " << v1 << std::endl;
+
+	return 0;
+}
+
+
+
+
 int OperatorOverloading(){
 	// BasicOverloading();
 	// ComplexOverload();
 	// SmartPointerOverloads();
 	// FunctionOverloading();
 	// StringOverload();
+	VectorOverload();
 
 	return 0;
 }
