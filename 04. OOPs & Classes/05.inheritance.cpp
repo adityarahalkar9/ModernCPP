@@ -481,7 +481,7 @@ int Inheritance(){
 	// MultipleInheritance();
 	// MultilevelInheritance();
 	// HierarchicalInheritance();
-	HybridInheritance();
+	// HybridInheritance();
 
 	return 0;
 }
