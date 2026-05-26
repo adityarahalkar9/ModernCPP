@@ -368,12 +368,120 @@ int HierarchicalInheritance(){
 
 
 
+// HYBRID INHERITANCE
+/*
+	 Hybrid inheritance combines two or more types of inheritance.
+*/
+namespace hybrid{
+	// Base class: Person
+	class Person{
+	protected:
+		std::string name{};
+		int age{};
+	public:
+		Person(std::string n, int a) : name{n}, age{a}{
+			std::cout << "[hybrid::Person] Created: " << name << ", " << age << " years old" << std::endl;
+		}
+		void Introduce() const{
+			std::cout << "Hi, I'm " << name << " and I'm " << age << " years old." << std::endl;
+		}
+		std::string GetName() const{
+			return name;
+		}
+		int GetAge() const{
+			return age;
+		}
+	};
+	// Derived class 1: Student
+	class Student : public Person {
+	protected:
+		std::string school{};
+		int grade_level{};
+	public:
+		Student(std::string n, int a, std::string sch, int grade) : Person{n, a}, school{sch}, grade_level{grade}{
+			std::cout << "[hybrid::Student] Created: School = " << school << ", Grade = " << grade_level << std::endl;
+		}
+		void Study() const{
+			std::cout << name << " is studying at " << school << " (Grade " << grade_level << ")." << std::endl;
+		}
+	};
+	// Derived class 2: Employee
+	class Employee : public Person {
+	protected:
+		std::string company{};
+		double salary{};
+	public:
+		Employee(std::string n, int a, std::string comp, double sal) : Person{n, a}, company{comp}, salary{sal}{
+			std::cout << "[hybrid::Employee] Created: Company = " << company << ", Salary = $" << salary << std::endl;
+		}
+		void Work() const{
+			std::cout << name << " works at " << company << " earning $" << salary << " per year." << std::endl;
+		}
+	};
+	// Most derived class
+	class WorkingStudent : public Student, public Employee{
+	private:
+		int hours_per_week{};
+	public:
+		WorkingStudent(std::string n, int a, std::string sch, int grade, std::string comp, double sal, int hours)
+			: Student{n, a, sch, grade}, Employee{n, a, comp, sal}, hours_per_week{hours}{
+			std::cout << "[hybrid::WorkingStudent] Created: Works " << hours_per_week << " hours per week" << std::endl;
+		}
+		void WorkAndStudy() const{
+			// Explicitly scoping to Student branch to resolve the 'name' ambiguity
+			std::cout << Student::name << " is a working student." << std::endl;
+			std::cout << "Studies at " << school << " and works at " << company << "." << std::endl;
+			std::cout << "Works " << hours_per_week << " hours per week." << std::endl;
+		}
+		void DisplayFullProfile() const{
+			std::cout << "\n========== WORKING STUDENT FULL PROFILE ==========\n";
+			// Resolving ambiguity for 'name' and 'age'
+			std::cout << "Name:         " << Student::name << " (via Student branch)\n";
+			std::cout << "Age:          " << Student::age << " (via Student branch)\n";
+			std::cout << "School:       " << school << " (from Student)\n";
+			std::cout << "Grade:        " << grade_level << " (from Student)\n";
+			std::cout << "Company:      " << company << " (from Employee)\n";
+			std::cout << "Salary:       $" << salary << " (from Employee)\n";
+			std::cout << "Hours/week:   " << hours_per_week << " (from WorkingStudent)\n";
+			std::cout << "==================================================" << std::endl;
+		}
+	};
+}
+int HybridInheritance(){
+	std::cout << "=== Hybrid Inheritance (Diamond without virtual) ===\n" << std::endl;
+
+	hybrid::WorkingStudent ws{
+		"Alex Johnson", 22,
+		"State University", 16,
+		"TechCorp Inc.", 35000.0, 20
+	};
+
+	std::cout << "\n--- Ambiguity Resolution ---" << std::endl;
+	// Calling the base method via a specific path
+	ws.Student::Introduce();
+
+	ws.Study();
+	ws.Work();
+	ws.DisplayFullProfile();
+
+	std::cout << "\n--- Object Memory Layout ---" << std::endl;
+	std::cout << "Size of Person:         " << sizeof(hybrid::Person) << " bytes" << std::endl;
+	std::cout << "Size of Student:        " << sizeof(hybrid::Student) << " bytes" << std::endl;
+	std::cout << "Size of Employee:       " << sizeof(hybrid::Employee) << " bytes" << std::endl;
+	std::cout << "Size of WorkingStudent: " << sizeof(hybrid::WorkingStudent) << " bytes" << std::endl;
+
+	return 0;
+}
+
+
+
 int Inheritance(){
 	// BasicInheritance();
 	// SingleInheritance();
 	// MultipleInheritance();
 	// MultilevelInheritance();
-	HierarchicalInheritance();
+	// HierarchicalInheritance();
+	HybridInheritance();
 
 	return 0;
 }
