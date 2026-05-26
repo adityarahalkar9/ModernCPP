@@ -7,3 +7,4 @@ int Inheritance();
 int OperatorOverloading();
 int VirtualFuction();
 int Interfaces();
+int Polymorphism();
