@@ -3,6 +3,7 @@
 #include <stdexcept>		 // for std::runtime_error
 #include <memory>			 // for std::unique_ptr, std::make_unique
 #include <string>
+#include <condition_variable>
 #include <fstream>
 #include <mutex>
 #include <shared_mutex>
@@ -232,7 +233,6 @@ void FileStream(){
 		std::ofstream outfile{"example.txt"};    // brace init, filenames "example.txt"
 		if(!outfile){	// if file couldn't be opened
 			std::cerr << "Error opening file for writing" << std::endl;
-			return 0;
 		}
 		outfile << "Hello, RAII file handling";
 		// No need to close; the destructor will close the file when outfile goes out of scope.
@@ -301,6 +301,32 @@ namespace mutexlocks{
 		}   // shared lock released
 		// Note: condition_variable (later) requires unique_lock
 	}
+
+	// Condition Variable Example
+	std::mutex cv_mtx;
+	std::condition_variable cv;
+	bool ready{false};
+
+	void Waiter(){
+		std::unique_lock lock{cv_mtx};		  // lock must be unique_lock
+		// wait() unloacks the mutex and sleeps until notified, then re_locks
+		cv.wait(lock, []{ return ready; });	  // lamba cheacks predicate
+		std::cout << "Notified, ready is true";
+	}
+	void Signal() {
+		{
+			std::lock_guard guard{cv_mtx};
+			ready = true;
+		}
+		cv.notify_one();  // wake up one waiter
+	}
+	int ConditionVariable(){
+		std::jthread t1{Waiter};	// jthread - auto-join (next section)
+		std::jthread t2{Signal};
+		// both threads join automatically
+
+		return 0;
+	}
 }
 
 
@@ -310,6 +336,7 @@ int RAII(){
 	// Exception_error();
 	// StandardLibraryRAIIClasses();
 	// SharedPtrWeakPtr();
+	mutexlocks::MutexLocks();
 
 	return 0;
 }
