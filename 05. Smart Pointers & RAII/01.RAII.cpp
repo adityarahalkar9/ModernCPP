@@ -8,6 +8,10 @@
 #include <mutex>
 #include <shared_mutex>
 #include <thread>
+#include <vector>
+#include <memory_resource>
+#include <algorithm>		// std::copy_n
+#include <utility>			// std::exchange, std::swap
 
 /*
 	RAII stands for Resource Acquisition Is Initialisation. It is a 
@@ -329,6 +333,214 @@ namespace mutexlocks{
 	}
 }
 
+// 5. std::jthread – RAII Thread Management (C++20)
+/*
+	std::jthread is an RAII thread class. Its destructor automatically joins the 
+	thread if it is still joinable, preventing the program from terminating 
+	(unlike std::thread, whose destructor calls std::terminate if not joined or detached). 
+	It also supports cooperative cancellation via std::stop_token.
+*/
+void Jthread(){
+	// Create a jthread that runs a lambda.
+	std::jthread worker{[]{
+		std::cout << "Worker thread executing";
+	}};	// destructor of worker will call join() automatically
+	std::cout << "Main thread continue";
+	// worker.join() is not called explicitly; it's done by ~jthread()
+}
+
+// 6. Custom Deleters – Using std::unique_ptr with OS Handles
+/*
+	std::unique_ptr can take a custom deleter (a callable) that is invoked instead of delete. 
+	This allows managing arbitrary resources like FILE*, operating system handles, or sockets.
+*/
+void CustomDeleters(){
+	// Define a deleter lambda that closes a FILE*
+	auto close_file = [](std::FILE* fp) {
+		if(fp){
+			std::fclose(fp);
+			std::cout << "File closed by custom deleter\n";
+		}
+	};
+	// The type of the unique_ptr must include the deleter type.
+	using FilePtr = std::unique_ptr<std::FILE, decltype(close_file)>;
+
+	// Construct the unique_ptr with the raw FILE* and the deleter.
+	// std::fopen returns a FILE* (or nullptr on error).
+	{
+		FilePtr fptr{std::fopen("demo.txt", "w"), close_file};
+		if(fptr) {
+			std::fputs("Hello from custom deleter RAII\n", fptr.get());
+		}
+	} // fptr destroyed → close_file called, which calls fclose
+
+	// For shared_ptr, the deleter is type‑erased (no need to specify in type).
+	{
+		std::shared_ptr<std::FILE> sptr{std::fopen("demo.txt", "r"), std::fclose};
+		// ...
+	} // fclose called
+
+}
+// 3.7 Polymorphic Memory Resources – std::pmr
+/*
+	C++17 introduced polymorphic memory resources (std::pmr::memory_resource) and 
+	containers that use them (e.g., std::pmr::vector). The allocator is stored as 
+	a pointer and obeys RAII: the container’s destructor releases the memory back 
+	to the resource. A std::pmr::monotonic_buffer_resource allocates from a 
+	pre‑allocated buffer and never frees until destroyed.
+*/
+int PolymorphicMemoryResources(){
+	// A small buffer on the stack
+	char buffer[4096]{};
+	// Create a monotonic buffer resource that uses out buffer
+	std::pmr::monotonic_buffer_resource pool{std::data(buffer), std::size(buffer)};
+
+	// Create a pmr vector that allocates from the pool
+	std::pmr::vector<int> vec{&pool};
+	vec.push_back(10);
+	vec.push_back(20);
+	std::cout << "vec size: " << vec.size() << std::endl;
+	// When 'vec' is destroyed, the memory is released back to the monotonic resource.
+	// The buffer itself is destroyed only when it goes out of scope.
+
+	return 0;
+}
+
+
+/*
+	Building Your Own RAII Class – The Rule of Five
+	Definition – Rule of Five: If a class manually manages a resource (e.g., raw pointer
+	to dynamic memory), you must explicitly define or delete the following five special
+	member functions:
+	1. Destructor
+	2. Copy constructor
+	3. Copy assignment operator
+	4. Move constructor
+	5. Move assignment operator
+	This ensures correct resource management during copy, move, and destruction.
+
+	Keywords explained:
+	-> noexcept – a specifier that promises a function will not throw exceptions. Move
+				  constructors/assignment should be noexcept to enable optimisations
+				  (e.g., std::vector reallocation).
+	-> std::exchange(obj, new_value) – replaces obj with new_value and returns the
+									   old value. Commonly used in move operations to
+									   transfer ownership and leave the source empty.
+	-> swap – a function that exchanges the internals of two objects;
+			  should be noexcept.
+	-> Copy‑and‑swap idiom – the copy assignment operator creates a temporary copy,
+							 then swaps it with *this. If the copy throws, the original
+							 object remains unchanged (strong exception guarantee).
+*/
+class Buffer {
+private:
+	std::size_t size_{0};
+	int* data_{nullptr};
+
+public:
+	// Constructor
+	explicit Buffer(std::size_t size)
+		: size_{size}, data_{new int[size]{}}
+	{
+		std::cout << "Buffer of size " << size_ << " constructed\n";
+	}
+
+	// Destructor
+	~Buffer() {
+		delete[] data_;
+		std::cout << "Buffer destroyed\n";
+	}
+
+	// Copy constructor (deep copy)
+	Buffer(const Buffer& other)
+		: size_{other.size_},
+		data_{other.size_ ? new int[other.size_] : nullptr}
+	{
+		if(size_ > 0) {
+			std::copy_n(other.data_, size_, data_);
+		}
+		std::cout << "Buffer copied\n";
+	}
+
+	// Copy assignment (copy-and-swap)
+	Buffer& operator=(const Buffer& other) {
+		if(this != &other) {
+			Buffer temp(other);
+			Swap(temp);
+		}
+		return *this;
+	}
+
+	// Move constructor
+	Buffer(Buffer&& other) noexcept
+		: size_{std::exchange(other.size_, 0)},
+		data_{std::exchange(other.data_, nullptr)}
+	{
+		std::cout << "Buffer moved\n";
+	}
+
+	// Move assignment
+	Buffer& operator=(Buffer&& other) noexcept {
+		if(this != &other) {
+			delete[] data_;
+
+			size_ = std::exchange(other.size_, 0);
+			data_ = std::exchange(other.data_, nullptr);
+		}
+		return *this;
+	}
+
+	// Member swap
+	void Swap(Buffer& other) noexcept {
+		using std::swap;
+		swap(size_, other.size_);
+		swap(data_, other.data_);
+	}
+
+	// Element access
+	int& operator[](std::size_t index) {
+		return data_[index];
+	}
+
+	const int& operator[](std::size_t index) const {
+		return data_[index];
+	}
+
+	// Size accessor
+	std::size_t size() const {
+		return size_;
+	}
+
+	// Friend swap for ADL
+	friend void Swap(Buffer& lhs, Buffer& rhs) noexcept {
+		lhs.Swap(rhs);
+	}
+};
+int BufferExample(){
+	Buffer buf1{5};
+	buf1[0] = 42;
+
+	Buffer buf2 = buf1;          // Copy constructor
+	std::cout << "buf2[0] = " << buf2[0] << '\n';
+
+	Buffer buf3 = std::move(buf1); // Move constructor
+	std::cout << "buf1 size after move: "
+		<< buf1.size() << '\n';
+
+	buf2 = std::move(buf3);        // Move assignment
+	std::cout << "buf2 size after move assign: "
+		<< buf2.size() << '\n';
+
+	return 0;
+}
+/*
+	-> std::exchange elegantly transfers ownership and leaves the source in a 
+	   defined, empty state.
+	-> noexcept on move operations enables optimisations (e.g., std::vector 
+	   will move instead of copy when resizing).
+	-> Copy‑and‑swap makes assignment strongly exception‑safe.
+*/
+
 
 
 int RAII(){
@@ -340,5 +552,13 @@ int RAII(){
 	// mutexlocks::MutexLocks();
 	// mutexlocks::ConditionVariable();
 
+	// CustomDeleters();
+	// PolymorphicMemoryResources();
+
+	BufferExample();
+
 	return 0;
 }
+
+
+
