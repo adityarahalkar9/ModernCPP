@@ -106,3 +106,14 @@ void LifetimeExtension();
 void DanglingReferences();
 void DynamicLifetime();
 void ThreadStorageDemo();
+
+// 21.preprocessor.cpp
+void BasicMacros();
+void ConditionalCompilation();
+void PredefinedMacros();
+void TokenManipulation();
+void VariadicMacros();
+void FeatureTestingMacros();
+void WarningDirective();
+void CompileTimeAssertions();
+void LineContinuation();

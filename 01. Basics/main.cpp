@@ -2,5 +2,5 @@ import std;
 #include "basic_header.h"
 
 int main(){
-	DanglingReferences();
+	LineContinuation();
 }
