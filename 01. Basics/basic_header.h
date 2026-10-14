@@ -33,3 +33,14 @@ void DecltypeInTemplates();
 void DecltypeAutoForwarding();
 void AutoWithConcepts();
 void AutoAsTemplateParameter();
+
+// 
+void StringBasics();
+void StringElementAccess();
+void StringModification();
+void StringSearch();
+void StringComparison();
+void StringViewBasics();
+void StringConversions();
+void RawStringLiterals();
+void Char8_t();
