@@ -56,3 +56,12 @@ void IsScopedEnum();
 void EnumInSwitch();
 void ForwardDeclaredEnum();
 void EnumIteration();
+
+// 16.type_casting.cpp
+void StaticCastDemo();
+void DynamicCastDemo();
+void ConstCastDemo();
+void ReinterpretCastDemo();
+void CStyleCastDemo();
+void ImplicitVsExplicit();
+void SmartPointerCasts();
