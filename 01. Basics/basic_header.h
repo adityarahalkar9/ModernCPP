@@ -95,3 +95,14 @@ void ValueVsDefaultInit();
 void CopyVsDirectListInit();
 void ParenthesizedInit();
 void InitializationOrder();
+
+// 20.scope_&_lifetime.cpp
+void ScopeBasics();
+void VariableShadowing();
+void ObjectLifetime();
+void StaticLocalVariables();
+void RAIIDemo();
+void LifetimeExtension();
+void DanglingReferences();
+void DynamicLifetime();
+void ThreadStorageDemo();
