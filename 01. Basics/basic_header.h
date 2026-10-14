@@ -11,4 +11,14 @@ int ControlFlow();
 int Size_t_size_of();
 int Arrays();
 int StlArray();
-int TypeDeduction();
+
+// 12.type_deduction.cpp
+void AutoBasic();
+void AutoWithModifiers();
+void AutoReturnTypes();
+void DecltypeBasic();
+void DecltypeExpressions();
+void DecltypeAuto();
+void AbbreviatedFunctionTemplates();
+void AutoWithStructuredBindings();
+void DecayCopy();
