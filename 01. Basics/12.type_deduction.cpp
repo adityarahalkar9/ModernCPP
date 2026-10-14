@@ -38,17 +38,16 @@ void AutoWithModifiers() {
 }
 
 // auto in function return types
-auto Add(int a, int b) -> int {
+auto AddAuto(int a, int b) -> int {
     return a + b;
 }
-
 // C++14: auto return type deduction
-auto Multiply(int a, int b) {
+auto MultiplyAuto(int a, int b) {
     return a * b;  // return type deduced as int
 }
 void AutoReturnTypes() {
-    std::cout << "Add(3, 4) = " << Add(3, 4) << std::endl;
-    std::cout << "Multiply(5, 6) = " << Multiply(5, 6) << std::endl;
+    std::cout << "Add(3, 4) = " << AddAuto(3, 4) << std::endl;
+    std::cout << "Multiply(5, 6) = " << MultiplyAuto(5, 6) << std::endl;
 }
 
 // decltype: inspects the declared type of an entity
@@ -124,7 +123,8 @@ void AutoWithStructuredBindings(){
 }
 
 // C++23: auto(x) and auto{x} - decay copy in the language
-void DecayCopy() {
+/*
+    void DecayCopy() {
     int arr[] = {1, 2, 3, 4, 5};
 
     // C++23: explicit decay copy
@@ -141,4 +141,5 @@ void DecayCopy() {
     auto int_arr = auto{arr};          // int* using brace syntax
     std::cout << "Second element: " << int_arr[1] << std::endl;
 }
+*/
 

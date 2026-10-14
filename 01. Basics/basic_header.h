@@ -21,4 +21,15 @@ void DecltypeExpressions();
 void DecltypeAuto();
 void AbbreviatedFunctionTemplates();
 void AutoWithStructuredBindings();
-void DecayCopy();
+// void DecayCopy();
+
+// 13.auto_&_decltype.cpp
+void AutoDeductionRules();
+void AutoWithContainers();
+void AutoInLambdas();
+void TrailingReturnType();
+void DecltypeInTypeTraits();
+void DecltypeInTemplates();
+void DecltypeAutoForwarding();
+void AutoWithConcepts();
+void AutoAsTemplateParameter();
