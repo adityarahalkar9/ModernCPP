@@ -77,7 +77,7 @@ void PrintDemo();
 void StreamStates();
 void CustomOutputOperator();
 
-//18.compound_types.cpp
+// 18.compound_types.cpp
 void PairBasics();
 void TupleBasics();
 void StructuredBindings();
@@ -85,3 +85,13 @@ void OptionalBasics();
 void VariantBasics();
 void AnyBasics();
 void ExpectedBasics();
+
+// 19.initialization.cpp
+void InitializationSyntaxes();
+void AggregateInitialization();
+void DesignatedInitializers();
+void ContainerInitialization();
+void ValueVsDefaultInit();
+void CopyVsDirectListInit();
+void ParenthesizedInit();
+void InitializationOrder();
