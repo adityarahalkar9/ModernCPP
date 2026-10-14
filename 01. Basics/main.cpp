@@ -1,6 +1,6 @@
-#include <iostream>
+import std;
 #include "basic_header.h"
 
 int main(){
-	StringConversions();
+	EnumInSwitch();
 }

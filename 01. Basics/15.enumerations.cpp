@@ -1,15 +1,13 @@
-#include <iostream>
-#include <type_traits>
+import std;
 #include "basic_header.h"
 
 // Unscoped enum (C-style)
-enum Color {
+enum Color{
     RED,      // 0
     GREEN,    // 1
     BLUE      // 2
 };
-
-void UnscopedEnum() {
+void UnscopedEnum(){
     Color c = RED;
     std::cout << "Color: " << c << std::endl;
     std::cout << "RED = " << RED << std::endl;
@@ -21,26 +19,28 @@ void UnscopedEnum() {
     std::cout << "As int: " << value << std::endl;
 }
 
-// Unscoped enum with explicit underlying type
-enum SmallEnum : uint8_t {
-    SE_A = 0,
-    SE_B = 1
-};
 
-void EnumWithBaseType() {
-    std::cout << "sizeof(SmallEnum): " << sizeof(SmallEnum) << std::endl;
-    SmallEnum e = SE_A;
-    std::cout << "SE_A = " << static_cast<int>(e) << std::endl;
-}
+/*
+    // Unscoped enum with explicit underlying type
+    enum SmallEnum : uint8_t{
+        SE_A = 0,
+        SE_B = 1
+    };
+    void EnumWithBaseType(){
+        std::cout << "sizeof(SmallEnum): " << sizeof(SmallEnum) << std::endl;
+        SmallEnum e = SE_A;
+        std::cout << "SE_A = " << static_cast<int>(e) << std::endl;
+    }
+*/
+
 
 // Scoped enum (enum class) - C++11
-enum class ScopedColor {
+enum class ScopedColor{
     Red,
     Green,
     Blue
 };
-
-void ScopedEnum() {
+void ScopedEnum(){
     ScopedColor c = ScopedColor::Red;
 
     // Must use scope resolution
@@ -52,6 +52,7 @@ void ScopedEnum() {
     std::cout << "Explicit conversion: " << y << std::endl;
 }
 
+
 // Scoped enum with custom underlying type
 enum class Priority : int {
     Lowest = 0,
@@ -60,8 +61,7 @@ enum class Priority : int {
     High = 10,
     Highest = 100
 };
-
-void ScopedEnumWithBase() {
+void ScopedEnumWithBase(){
     Priority p = Priority::High;
     std::cout << "Priority::High = " << static_cast<int>(p) << std::endl;
 
@@ -72,8 +72,9 @@ void ScopedEnumWithBase() {
     std::cout << "Both are enums" << std::endl;
 }
 
+
 // Using enums for type-safe flags
-enum class FileOpenMode {
+enum class FileOpenMode{
     None = 0,
     Read = 1,
     Write = 2,
@@ -81,19 +82,16 @@ enum class FileOpenMode {
     Append = 8,
     Truncate = 16
 };
-
 // Operator overloading for enum flags
 constexpr FileOpenMode operator|(FileOpenMode a, FileOpenMode b) {
     return static_cast<FileOpenMode>(
         static_cast<int>(a) | static_cast<int>(b)
         );
 }
-
 constexpr bool operator&(FileOpenMode a, FileOpenMode b) {
     return (static_cast<int>(a) & static_cast<int>(b)) != 0;
 }
-
-void EnumFlags() {
+void EnumFlags(){
     auto mode = FileOpenMode::Read | FileOpenMode::Write | FileOpenMode::Binary;
 
     if(mode & FileOpenMode::Read) {
@@ -107,64 +105,62 @@ void EnumFlags() {
     }
 }
 
-// C++23: std::to_underlying
-#include <utility>
 
-void ToUnderlying() {
-    Color c = GREEN;
-    auto underlying = std::to_underlying(c);  // C++23
-    std::cout << "std::to_underlying(GREEN) = " << underlying << std::endl;
+/*
+    // std::to_underlying
+    void ToUnderlying() {
+        Color c = GREEN;
+        auto underlying = std::to_underlying(c);  // C++23
+        std::cout << "std::to_underlying(GREEN) = " << underlying << std::endl;
 
-    ScopedColor sc = ScopedColor::Blue;
-    auto sc_underlying = std::to_underlying(sc);
-    std::cout << "std::to_underlying(ScopedColor::Blue) = " << sc_underlying << std::endl;
+        ScopedColor sc = ScopedColor::Blue;
+        auto sc_underlying = std::to_underlying(sc);
+        std::cout << "std::to_underlying(ScopedColor::Blue) = " << sc_underlying << std::endl;
 
-    // Same as static_cast but more explicit about intent
-    static_assert(std::is_same_v<decltype(std::to_underlying(c)), int>);
-}
+        // Same as static_cast but more explicit about intent
+        static_assert(std::is_same_v<decltype(std::to_underlying(c)), int>);
+    }
+    // C++23: std::is_scoped_enum type trait
+    void IsScopedEnum() {
+        static_assert(std::is_scoped_enum_v<ScopedColor>);
+        static_assert(!std::is_scoped_enum_v<Color>);
 
-// C++23: std::is_scoped_enum type trait
-void IsScopedEnum() {
-    static_assert(std::is_scoped_enum_v<ScopedColor>);
-    static_assert(!std::is_scoped_enum_v<Color>);
+        std::cout << "ScopedColor is a scoped enum" << std::endl;
+        std::cout << "Color is NOT a scoped enum" << std::endl;
+    }
+*/
 
-    std::cout << "ScopedColor is a scoped enum" << std::endl;
-    std::cout << "Color is NOT a scoped enum" << std::endl;
-}
 
 // Enum in switch statements
-void EnumInSwitch() {
+void EnumInSwitch(){
     auto getColorName = [](ScopedColor c) -> std::string {
-        switch(c) {
+        switch(c){
             case ScopedColor::Red:   return "Red";
             case ScopedColor::Green: return "Green";
             case ScopedColor::Blue:  return "Blue";
             default: return "Unknown";
-        }
+            }
         };
-
     std::cout << "Color name: " << getColorName(ScopedColor::Green) << std::endl;
 }
 
+
 // Forward declaration of enums
 enum class ForwardEnum : int;  // Forward declaration with base type
-
 void FunctionTakingForwardEnum(ForwardEnum e);
-
-enum class ForwardEnum : int {
+enum class ForwardEnum : int{
     Value1,
     Value2
 };
-
 void ForwardDeclaredEnum() {
     ForwardEnum e = ForwardEnum::Value1;
     std::cout << "Forward declared enum value: "
         << static_cast<int>(e) << std::endl;
 }
-
 void FunctionTakingForwardEnum(ForwardEnum e) {
     std::cout << "Received forward enum: " << static_cast<int>(e) << std::endl;
 }
+
 
 // Iterating over enum values (technique)
 enum Weekday {
@@ -177,7 +173,6 @@ enum Weekday {
     Sunday,
     WeekdayCount  // sentinel
 };
-
 void EnumIteration() {
     for(int i = 0; i < WeekdayCount; ++i) {
         Weekday day = static_cast<Weekday>(i);
