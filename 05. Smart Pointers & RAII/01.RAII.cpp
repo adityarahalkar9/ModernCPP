@@ -44,8 +44,16 @@ void SimplestRAII(){
 	Resource r{};
 	std::cout << "in scope" << std::endl;
 
-	// At tge closing brace, r runs out of scope and ~Resource runs
+	// At the closing brace, r runs out of scope and ~Resource runs
 }
+/*
+	The RAII contract - Every RAII contract obeys
+	1. Constructor: acquire the resource, or throw - never leave the object half-constructed
+	2. Destructor: release the resource never throw
+	3. Copy: either forbid, deep-copy 
+	4. Move: transfer ownership and reset the source to a safe empty state
+	5. No manual release: the user of the type should not have to remember everything
+*/
 
 
 int RAII(){

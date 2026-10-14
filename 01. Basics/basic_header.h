@@ -11,3 +11,4 @@ int ControlFlow();
 int Size_t_size_of();
 int Arrays();
 int StlArray();
+int TypeDeduction();
