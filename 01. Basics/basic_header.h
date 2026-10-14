@@ -76,3 +76,12 @@ void FormatDemo();
 void PrintDemo();
 void StreamStates();
 void CustomOutputOperator();
+
+//18.compound_types.cpp
+void PairBasics();
+void TupleBasics();
+void StructuredBindings();
+void OptionalBasics();
+void VariantBasics();
+void AnyBasics();
+void ExpectedBasics();
