@@ -34,7 +34,7 @@ void DecltypeAutoForwarding();
 void AutoWithConcepts();
 void AutoAsTemplateParameter();
 
-// 
+// 14.string_basics.cpp
 void StringBasics();
 void StringElementAccess();
 void StringModification();
@@ -44,3 +44,15 @@ void StringViewBasics();
 void StringConversions();
 void RawStringLiterals();
 void Char8_t();
+
+// 15.enumerations.cpp
+void UnscopedEnum();
+void EnumWithBaseType();
+void ScopedEnum();
+void ScopedEnumWithBase();
+void EnumFlags();
+void ToUnderlying();
+void IsScopedEnum();
+void EnumInSwitch();
+void ForwardDeclaredEnum();
+void EnumIteration();
