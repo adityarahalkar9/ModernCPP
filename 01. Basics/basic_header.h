@@ -65,3 +65,14 @@ void ReinterpretCastDemo();
 void CStyleCastDemo();
 void ImplicitVsExplicit();
 void SmartPointerCasts();
+
+// 17.input_output.cpp
+void BasicIO();
+void FormattedOutput();
+void InputHandling();
+void StringStreams();
+void FileIO();
+void FormatDemo();
+void PrintDemo();
+void StreamStates();
+void CustomOutputOperator();
