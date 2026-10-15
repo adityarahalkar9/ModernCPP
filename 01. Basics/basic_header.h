@@ -129,7 +129,7 @@ void ADLDemo();
 void NameCollisionResolution();
 void StdNamespaceBestPractices();
 
-// 23.structured_bindings
+// 23.structured_bindings.cpp
 void PairBindings();
 void TupleBindings();
 void StructBindings();
@@ -141,10 +141,19 @@ void IfWithBindings();
 void LambdaCaptureBindings();
 void InitStatementBindings();
 
-//	24.designated_initializers
+//	24.designated_initializers.cpp
 void BasicDesignatedInit();
 void DesignatedInitRules();
 void ArrayDesignatedInit();
 void BeforeAndAfterComparison();
 void PracticalExamples();
 void DesignatedInitWithInheritance();
+
+// 25.three_way_comparison.cpp
+void BasicSpaceship();
+void ComparisonCategories();
+void CustomComparison();
+void CompareThreeWay();
+void ContainerComparison();
+void EqualityAndOrdering();
+void EqualityOnly();
