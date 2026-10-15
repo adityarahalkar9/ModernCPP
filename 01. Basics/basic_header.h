@@ -185,3 +185,9 @@ void Size_tLiterals();
 void Size_tUseCases();
 void SignedUnsignedIssues();
 void SizeofRelationship();
+
+// 29.multidimensional_subscript.cpp
+void MultidimensionalSubscript();
+void ThreeDimensionalArray();
+void StaticSubscriptOperator();
+void MdspanDemo();
