@@ -128,3 +128,15 @@ void NestedNamespaceSyntax();
 void ADLDemo();
 void NameCollisionResolution();
 void StdNamespaceBestPractices();
+
+// 23.structured_bindings
+void PairBindings();
+void TupleBindings();
+void StructBindings();
+void ArrayBindings();
+void MapBindings();
+void RangeForBindings();
+void CustomTypeBindings();
+void IfWithBindings();
+void LambdaCaptureBindings();
+void InitStatementBindings();
