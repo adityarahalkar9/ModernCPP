@@ -166,3 +166,16 @@ void U8StringInView();
 void UnicodeEscapes();
 void CharacterTypesComparison();
 void MigrationNotes();
+
+// 27.attributes.cpp
+void NodiscardAttribute();
+void MaybeUnusedAttribute();
+void DeprecatedAttribute();
+void FallthroughAttribute();
+void LikelyUnlikelyAttributes();
+void NoUniqueAddressAttribute();
+void NoReturnAttribute();
+void AttributeSyntaxes();
+void AssumeAttribute();
+void AttributesOnLambdas();
+void MultipleAttributes();
