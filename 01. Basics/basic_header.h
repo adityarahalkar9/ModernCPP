@@ -179,3 +179,9 @@ void AttributeSyntaxes();
 void AssumeAttribute();
 void AttributesOnLambdas();
 void MultipleAttributes();
+
+// 28.size_t_literals.cpp
+void Size_tLiterals();
+void Size_tUseCases();
+void SignedUnsignedIssues();
+void SizeofRelationship();
