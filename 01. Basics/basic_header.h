@@ -140,3 +140,11 @@ void CustomTypeBindings();
 void IfWithBindings();
 void LambdaCaptureBindings();
 void InitStatementBindings();
+
+//	24.designated_initializers
+void BasicDesignatedInit();
+void DesignatedInitRules();
+void ArrayDesignatedInit();
+void BeforeAndAfterComparison();
+void PracticalExamples();
+void DesignatedInitWithInheritance();
