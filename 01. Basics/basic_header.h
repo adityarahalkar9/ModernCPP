@@ -191,3 +191,12 @@ void MultidimensionalSubscript();
 void ThreeDimensionalArray();
 void StaticSubscriptOperator();
 void MdspanDemo();
+
+// 30.if_consteval.cpp
+void IfConstevalBasic();
+void IfConstevalOptimization();
+void IfConstevalVsIfConstexpr();
+void IfNotConsteval();
+void ConstevalComparison();
+void CompileTimeGeneration();
+void ConstevalWithIfConsteval();
