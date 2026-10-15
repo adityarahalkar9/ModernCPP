@@ -117,3 +117,14 @@ void FeatureTestingMacros();
 void WarningDirective();
 void CompileTimeAssertions();
 void LineContinuation();
+
+// 22.namespaces.cpp
+void BasicNamespace();
+void UsingDeclarations();
+void NamespaceAliases();
+void AnonymousNamespace();
+void InlineNamespace();
+void NestedNamespaceSyntax();
+void ADLDemo();
+void NameCollisionResolution();
+void StdNamespaceBestPractices();
