@@ -157,3 +157,12 @@ void CompareThreeWay();
 void ContainerComparison();
 void EqualityAndOrdering();
 void EqualityOnly();
+
+// 26.char8_t.cpp
+void Char8_tBasics();
+void U8String();
+void UTF8Handling();
+void U8StringInView();
+void UnicodeEscapes();
+void CharacterTypesComparison();
+void MigrationNotes();
