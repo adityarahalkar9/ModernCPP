@@ -109,7 +109,3 @@ Contributions that improve clarity, correctness, portability, or learning value 
 ## License
 
 This repository includes an `Apache-2.0` license. See [`LICENSE.txt`](./LICENSE.txt) for the license terms.
-
-## Repository
-
-[adityarahalkar9/ModernCPP on GitHub](https://github.com/adityarahalkar9/ModernCPP)
