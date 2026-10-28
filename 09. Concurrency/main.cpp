@@ -53,6 +53,62 @@ int main() {
     // --- Memory Ordering (10) ---
     // MemoryOrderingBasics();
 
+    // --- Thread Safety (11) ---
+    // ThreadSafetyLevels();
+    // DesigningThreadSafeClass();
+
+    // --- Producer-Consumer (12) ---
+    // CompleteProducerConsumer();
+
+    // --- Readers-Writers (13) ---
+    // ReadersWritersPattern();
+
+    // --- Thread Pool (14) ---
+    // ThreadPoolImplementation();
+
+    // --- jthread (15) ---
+    // JThreadBasics();
+    // JThreadWithStopToken();
+
+    // --- Stop Token (16) ---
+    // StopTokenComponents();
+    // PatternsWithStopToken();
+
+    // --- Atomic Patterns (17) ---
+    // AtomicCounterPattern();
+    // AtomicFlagPattern();
+    // CASPattern();
+
+    // --- Lock-Free Queue (18) ---
+    // SPSCQueue();
+
+    // --- Benchmarking (19) ---
+    // BenchmarkBasics();
+    // ScalingBenchmark();
+
+    // --- Amdahl's Law (20) ---
+    // AmdahlsLawExplained();
+    // GustafsonsLaw();
+
+    // --- Task Granularity (21) ---
+    // GranularityExperiment();
+
+    // --- Nested Parallelism (22) ---
+    // ThreadExplosion();
+    // PracticalNestedParallel();
+
+    // --- Sync Patterns (23) ---
+    // PatternCatalog();
+
+    // --- Pitfalls (24) ---
+    // Pitfall1_ForgottenJoin();
+    // Pitfall2_DetachedThreadAccess();
+    // Pitfall3_LockScopeTooLarge();
+
+    // --- Best Practices (25) ---
+    // BestPracticesSummary();
+    // DecisionTree();
+
     std::cout << std::endl << "========================================" << std::endl;
     std::cout << "  End of Concurrency Examples" << std::endl;
     std::cout << "========================================" << std::endl;
